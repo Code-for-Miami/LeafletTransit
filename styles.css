@@ -43,8 +43,14 @@ th,td {
   background: rgba(255,255,255,0.8);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
+  max-width: 250px;
 }
-.control h4 {
-    margin: 0 0 5px;
+
+.control h5 {
+    margin: 0 0 10px;
     color: #777;
+}
+
+.control button {
+  margin: 0 6px 6px 0;
 }
