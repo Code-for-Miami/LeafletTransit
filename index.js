@@ -1272,14 +1272,14 @@ function addControlPane() {
   };
 
   info.update = function () {
-    this._div.innerHTML = '<h4>Map Controls</h4>' +
-      '<br><button onclick="showBusLayers()">Show Buses</button>  ' +
-      '<button onclick="showTrolleyLayers()">Show Trolleys</button>  ' +
-      '<button onclick="showRailLayers()">Show Rail</button>' +
-      '<br><br><button onclick="toggleLayers()">Show/Hide All</button>  ' +
-      '<button onclick="showBusGPS()">Show Bus GPS</button>' +
-      '<br><br><button onclick="toggleRefresh()">Enable/Disable Refresh</button>' +
-      '<br><div id="slider"></div>';
+    this._div.innerHTML = '<h5>Map Controls</h5>' +
+      '<button class="btn-xs btn-primary" onclick="showBusLayers()">Show Buses</button>' +
+      '<button class="btn-xs btn-primary" onclick="showTrolleyLayers()">Show Trolleys</button>' +
+      '<button class="btn-xs btn-primary" onclick="showRailLayers()">Show Metrorail</button>' +
+      '<button class="btn-xs btn-primary" onclick="toggleLayers()">Show/Hide All</button>' +
+      '<button class="btn-xs btn-primary" onclick="showBusGPS()">Show Bus GPS</button>' +
+      '<button class="btn-xs btn-primary" onclick="toggleRefresh()">Toggle Refresh</button>' +
+      '<div id="slider"></div>';
   };
 
   info.addTo(map);

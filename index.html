@@ -2,6 +2,9 @@
 <html data-ng-app="transitApp">
 
 	<head>
+		<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Miami-Dade Transit</title>
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -28,160 +31,160 @@
 		<link rel="stylesheet" href="styles.css" />
 	</head>
 
-	<body >
-		<h1>Miami-Dade Transit Live</h1>
-		<p class="info">Source Code: <a href="https://github.com/Code-for-Miami/LeafletTransit" target="_blank">
-					https://github.com/Code-for-Miami/LeafletTransit</a></p>
+	<body>
+		<div class="container">
+			<h1>Miami-Dade Transit Live</h1>
+			<p class="info">Source Code: <a href="https://github.com/Code-for-Miami/LeafletTransit" target="_blank">
+						https://github.com/Code-for-Miami/LeafletTransit</a></p>
 
-		<p class="info" id="wait">Waiting for server to go online in 15 seconds...</p>
-		<p class="info" id="refresh">Data from Miami Transit API GPS updates every 5 seconds</p>
+			<p class="info" id="wait">Waiting for server to go online in 15 seconds...</p>
+			<p class="info" id="refresh">Data from Miami Transit API GPS updates every 5 seconds</p>
 
-		<div id="map" style="height: 700px; width: 90%; margin-left: auto; margin-right: auto;"></div>
+			<div id="map" style="height: 700px; margin-left: auto; margin-right: auto;"></div>
 
-		<div class="tabsection"
-			style="margin-left: auto; margin-right: auto; width: 50%; padding: 20px 0px 0px 0px"
-			data-ng-controller="transitController">
-		    <ul class="nav nav-pills nav-justified">
-		        <li class="active"><a data-toggle="tab" href="#livebuses">Live Buses</a></li>
-		        <li><a data-toggle="tab" href="#busroutes">Bus Routes</a></li>
-						<li><a data-toggle="tab" href="#busstops">Bus Stops</a></li>
-						<li><a data-toggle="tab" href="#POIs">POIs</a></li>
-						<li><a data-toggle="tab" href="#trolleys">Trolleys</a></li>
-		    </ul>
-		    <div class="tab-content">
-		        <div id="livebuses" class="tab-pane fade in active">
-		            <h3>Live Buses</h3>
-								Live Buses: {{buses.length}}
-								<div id="busTable">
-			            <table>
-										<tr>
-											<th>Bus ID</th>
-											<th>Trip ID</th>
-									    <th>Route ID</th>
-											<th>Service Direction</th>
-											<th>Description</th>
-											<!--<th>Route Color</th>-->
-											<th>Last Updated</th>
-									  </tr>
-									  <tr data-ng-repeat="x in buses">
-											<td>{{x.BusID}}</td>
-									    <td>{{x.TripID}}</td>
-									    <td><button class="btn btn-primary" onclick="focusRoute(this.innerHTML)">{{x.RouteID}}</button></td>
-											<td>{{x.ServiceDirection}}</td>
-											<td><button class="btn btn-primary" id="{{x.BusID}}" onclick="focusBus(this.id)">{{x.TripHeadsign}}</button></td>
-									    <!--<td style="background-color: #{{x.color}}">{{x.color}}</td>-->
-											<td>{{x.LocationUpdated}}</td>
-										</tr>
-									</table>
-								</div>
-		        </div>
-		        <div id="busroutes" class="tab-pane fade">
-		            <h3>Bus Routes</h3>
-								Bus Routes: {{routes.length}}
-								<div id="busroutesTable">
-			            <table>
-										<tr>
-											<th>Route ID</th>
-											<th>Route Alias</th>
-									    <th>Route Description</th>
-									    <th>Route Color</th>
-									  </tr>
-									  <tr data-ng-repeat="x in routes">
-									    <td>{{x.RouteID}}</td>
-											<td>{{x.RouteAliasLong}}</td>
-									    <td>{{x.RouteDescription}}</td>
-									    <td style="background-color: #{{x.RouteColor}}">{{x.RouteColor}}</td>
-										</tr>
-									</table>
-								</div>
-		        </div>
-						<div id="busstops" class="tab-pane fade">
-		            <h3>Bus Stops</h3>
-								Stops: {{busStops[routeDir].length}} </br>
-								Route:
-								<select onchange="routeChanged(this.value)">
-									<option data-ng-repeat="x in uniqueBusRoutes"
-										value="{{x.RouteID}} {{x.ServiceDirection}}">{{x.RouteID}} {{x.ServiceDirection}}</option>
-								</select>
-								<div id="busStopTable">
-			            <table>
-										<tr>
-											<th>Sequence</th>
-											<th>Stop ID</th>
-											<th>Stop Name</th>
+			<div class="tabsection" data-ng-controller="transitController">
+			    <ul class="nav nav-pills nav-justified">
+			        <li class="active"><a data-toggle="tab" href="#livebuses">Live Buses</a></li>
+			        <li><a data-toggle="tab" href="#busroutes">Bus Routes</a></li>
+							<li><a data-toggle="tab" href="#busstops">Bus Stops</a></li>
+							<li><a data-toggle="tab" href="#POIs">POIs</a></li>
+							<li><a data-toggle="tab" href="#trolleys">Trolleys</a></li>
+			    </ul>
+			    <div class="tab-content">
+			        <div id="livebuses" class="tab-pane fade in active">
+			            <h3>Live Buses</h3>
+									Live Buses: {{buses.length}}
+									<div id="busTable">
+				            <table class="table">
+											<tr>
+												<th>Bus ID</th>
+												<th>Trip ID</th>
+										    <th>Route ID</th>
+												<th>Service Direction</th>
+												<th>Description</th>
+												<!--<th>Route Color</th>-->
+												<th>Last Updated</th>
+										  </tr>
+										  <tr data-ng-repeat="x in buses">
+												<td>{{x.BusID}}</td>
+										    <td>{{x.TripID}}</td>
+										    <td><button class="btn btn-primary" onclick="focusRoute(this.innerHTML)">{{x.RouteID}}</button></td>
+												<td>{{x.ServiceDirection}}</td>
+												<td><button class="btn btn-primary" id="{{x.BusID}}" onclick="focusBus(this.id)">{{x.TripHeadsign}}</button></td>
+										    <!--<td style="background-color: #{{x.color}}">{{x.color}}</td>-->
+												<td>{{x.LocationUpdated}}</td>
+											</tr>
+										</table>
+									</div>
+			        </div>
+			        <div id="busroutes" class="tab-pane fade">
+			            <h3>Bus Routes</h3>
+									Bus Routes: {{routes.length}}
+									<div id="busroutesTable">
+				            <table class="table">
+											<tr>
+												<th>Route ID</th>
+												<th>Route Alias</th>
+										    <th>Route Description</th>
+										    <th>Route Color</th>
+										  </tr>
+										  <tr data-ng-repeat="x in routes">
+										    <td>{{x.RouteID}}</td>
+												<td>{{x.RouteAliasLong}}</td>
+										    <td>{{x.RouteDescription}}</td>
+										    <td style="background-color: #{{x.RouteColor}}">{{x.RouteColor}}</td>
+											</tr>
+										</table>
+									</div>
+			        </div>
+							<div id="busstops" class="tab-pane fade">
+			            <h3>Bus Stops</h3>
+									Stops: {{busStops[routeDir].length}} </br>
+									Route:
+									<select onchange="routeChanged(this.value)">
+										<option data-ng-repeat="x in uniqueBusRoutes"
+											value="{{x.RouteID}} {{x.ServiceDirection}}">{{x.RouteID}} {{x.ServiceDirection}}</option>
+									</select>
+									<div id="busStopTable">
+				            <table class="table">
+											<tr>
+												<th>Sequence</th>
+												<th>Stop ID</th>
+												<th>Stop Name</th>
 
-									  </tr>
-									  <tr data-ng-repeat="x in busStops[routeDir]">
-											<td>{{x.Sequence}}</td>
-									    <td>{{x.StopID}}</td>
-											<td>{{x.StopName}}</td>
-										</tr>
-									</table>
-								</div>
-		        </div>
-						<div id="POIs" class="tab-pane fade">
-		            <h3>Points of Interest</h3>
-								POIs: {{POIs.length}} </br>
-								<div id="POIsTable">
-			            <table>
-										<tr>
-											<th>POI ID</th>
-											<th>Category</th>
-									    <th>Category Name</th>
-											<th>Name</th>
-											<th>Address</th>
-											<th>svHeading</th>
-									  </tr>
-									  <tr data-ng-repeat="x in POIs">
-									    <td>{{x.PointID}}</td>
-											<td><img src="icons/icon-POI-{{x.CategoryID}}.png" width="33" height="33">{{x.CategoryID}}</td>
-									    <td>{{x.CategoryName}}</td>
-											<td><button class="btn btn-primary" id="{{x.PointID}},{{x.Latitude}},{{x.Longitude}}" onclick="focusPOI(this.id)">{{x.PointName}}</button></td>
-											<td>{{x.Address}}, {{x.City}}, {{x.State}} {{x.Zip}}</td>
-											<td>{{x.svHeading}}</td>
-										</tr>
-									</table>
-								</div>
-		        </div>
-						<div id="trolleys" class="tab-pane fade">
-		            <h3>Trolleys</h3>
-								City of Miami Trolleys: {{trolleys.length}} </br>
-								<div id="trolleysTable">
-			            <table>
-										<tr>
-											<th>Trolley ID</th>
-											<th>Route ID</th>
-											<th>In Service</th>
-											<th>Next Stop ID</th>
-											<th>Schedule Number</th>
-									    <th>Receive Time</th>
-									  </tr>
-									  <tr data-ng-repeat="x in trolleys">
-									    <td>{{x.equipmentID}}</td>
-											<td>{{x.routeID}}</td>
-											<td>{{x.inService}}</td>
-											<td>{{x.nextStopID}}</td>
-											<td>{{x.scheduleNumber}}</td>
-									    <td>{{x.receiveTime}}</td>
-										</tr>
-									</table>
-								</div>
-		        </div>
+										  </tr>
+										  <tr data-ng-repeat="x in busStops[routeDir]">
+												<td>{{x.Sequence}}</td>
+										    <td>{{x.StopID}}</td>
+												<td>{{x.StopName}}</td>
+											</tr>
+										</table>
+									</div>
+			        </div>
+							<div id="POIs" class="tab-pane fade">
+			            <h3>Points of Interest</h3>
+									POIs: {{POIs.length}} </br>
+									<div id="POIsTable">
+				            <table class="table">
+											<tr>
+												<th>POI ID</th>
+												<th>Category</th>
+										    <th>Category Name</th>
+												<th>Name</th>
+												<th>Address</th>
+												<th>svHeading</th>
+										  </tr>
+										  <tr data-ng-repeat="x in POIs">
+										    <td>{{x.PointID}}</td>
+												<td><img src="icons/icon-POI-{{x.CategoryID}}.png" width="33" height="33">{{x.CategoryID}}</td>
+										    <td>{{x.CategoryName}}</td>
+												<td><button class="btn btn-primary" id="{{x.PointID}},{{x.Latitude}},{{x.Longitude}}" onclick="focusPOI(this.id)">{{x.PointName}}</button></td>
+												<td>{{x.Address}}, {{x.City}}, {{x.State}} {{x.Zip}}</td>
+												<td>{{x.svHeading}}</td>
+											</tr>
+										</table>
+									</div>
+			        </div>
+							<div id="trolleys" class="tab-pane fade">
+			            <h3>Trolleys</h3>
+									City of Miami Trolleys: {{trolleys.length}} </br>
+									<div id="trolleysTable">
+				            <table class="table">
+											<tr>
+												<th>Trolley ID</th>
+												<th>Route ID</th>
+												<th>In Service</th>
+												<th>Next Stop ID</th>
+												<th>Schedule Number</th>
+										    <th>Receive Time</th>
+										  </tr>
+										  <tr data-ng-repeat="x in trolleys">
+										    <td>{{x.equipmentID}}</td>
+												<td>{{x.routeID}}</td>
+												<td>{{x.inService}}</td>
+												<td>{{x.nextStopID}}</td>
+												<td>{{x.scheduleNumber}}</td>
+										    <td>{{x.receiveTime}}</td>
+											</tr>
+										</table>
+									</div>
+			        </div>
 
-		    </div>
+			    </div>
+			</div>
+
+			<div class="bottom">
+				<p>
+					Data retrieved from: <a href="http://www.miamidade.gov/transit/WebServices/Buses/?BusID=" target="_blank">
+						http://www.miamidade.gov/transit/WebServices/Buses/?BusID=</a>
+					<br />
+					When data is unavailable (night-time), no live buses are shown.
+				</p>
+			</div>
 		</div>
-
-		<div class="bottom" style="margin-left: auto; margin-right: auto; width: 50%; padding: 20px 0px 0px 0px">
-			<p>
-				Data retrieved from: <a href="http://www.miamidade.gov/transit/WebServices/Buses/?BusID=" target="_blank">
-					http://www.miamidade.gov/transit/WebServices/Buses/?BusID=</a>
-				<br />
-				When data is unavailable (night-time), no live buses are shown.
-			</p>
-		</div>
-
 		<!-- All Javascript code to display the buses on the map -->
 		<script src="index.js"></script>
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 	</body>
 
