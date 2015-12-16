@@ -1261,6 +1261,8 @@ $(document).ready(function(){
   // Initial slider
   //$( "#slider" ).slider();
   toggleRefresh();
+
+  $(".navbar-nav li a").click(collapseOffCanvasNav());
 });
 
 function addControlPane() {
@@ -1426,4 +1428,15 @@ function refreshMiamiTrolleys() {
          }
        }
     });
+}
+
+/**
+ *  Collapse offcanvas nav on nav item click
+ */
+function collapseOffCanvasNav() {
+  var toggle = $('.navbar-toggle').is(':visible');
+
+  if (toggle) {
+    $('.navbar-collapse').collapse('hide');
+  }
 }
