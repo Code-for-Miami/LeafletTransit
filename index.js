@@ -1262,7 +1262,7 @@ $(document).ready(function(){
   //$( "#slider" ).slider();
   toggleRefresh();
 
-  $(".navbar-nav li a").click(collapseOffCanvasNav());
+  $(".navbar-nav li a").click(collapseOffCanvasNav);
 });
 
 function addControlPane() {
