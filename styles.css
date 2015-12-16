@@ -53,6 +53,6 @@ p.info {
   margin: 0 6px 6px 0;
 }
 
-.tab-pane{
-  overflow-y:scroll;
+.overflow-y {
+  overflow-y: scroll;
 }
