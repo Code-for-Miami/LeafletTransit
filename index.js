@@ -19,9 +19,6 @@ var googleRoadmap = new L.Google('ROADMAP', { maxZoom: 20 });
 var googleHybrid = new L.Google('HYBRID', { maxZoom: 20 });
 var googleTraffic = new L.GoogleTraffic('ROADMAP', { maxZoom: 20 });
 
-// Add Control Panel
-addControlPane();
-
 // Set up layers to allow user to control map display
 var busLayer = new L.LayerGroup();
 var busStopsLayer = new L.LayerGroup();
@@ -1264,28 +1261,6 @@ $(document).ready(function(){
 
   $(".navbar-nav li a").click(collapseOffCanvasNav);
 });
-
-function addControlPane() {
-  var info = L.control();
-  info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'control'); // create a div with a class "control"
-    this.update();
-    return this._div;
-  };
-
-  info.update = function () {
-    this._div.innerHTML = '<h5>Map Controls</h5>' +
-      '<button class="btn-xs btn-primary" onclick="showBusLayers()">Show Buses</button>' +
-      '<button class="btn-xs btn-primary" onclick="showTrolleyLayers()">Show Trolleys</button>' +
-      '<button class="btn-xs btn-primary" onclick="showRailLayers()">Show Metrorail</button>' +
-      '<button class="btn-xs btn-primary" onclick="toggleLayers()">Show/Hide All</button>' +
-      '<button class="btn-xs btn-primary" onclick="showBusGPS()">Show Bus GPS</button>' +
-      '<button class="btn-xs btn-primary" onclick="toggleRefresh()">Toggle Refresh</button>' +
-      '<div id="slider"></div>';
-  };
-
-  info.addTo(map);
-}
 
 function toggleRefresh() {
   enableRefresh = !enableRefresh;

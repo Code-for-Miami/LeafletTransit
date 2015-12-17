@@ -1,5 +1,19 @@
 body {
-  padding-top: 50px;
+  padding: 50px 0;
+}
+
+.footer .btn-default {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  color: #777;
+  padding: 14px 12px;
+}
+
+.footer .btn-default.active {
+  background-color: #ddd;
+  border-color: #ccc;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 html,
@@ -10,6 +24,13 @@ body,
   height: 100%;
   overflow: hidden;
   width: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
 }
 
 p {
