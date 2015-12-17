@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="width=device-width, user-scalable=no" name="viewport">
   <title>Miami-Dade Transit</title>
   <link href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -203,19 +203,29 @@
   <footer class="footer">
     <div class="btn-group btn-group-justified" data-toggle="buttons">
       <div class="btn-group">
-        <button class="btn btn-default" onclick="showBusLayers()">Buses</button>
+        <label class="btn btn-default" onclick="showBusLayers()">
+          <input type="radio" name="options" id="buses" autocomplete="off">Buses
+        </label>
       </div>
       <div class="btn-group">
-        <button class="btn btn-default" onclick="showTrolleyLayers()">Trolleys</button>
+        <label class="btn btn-default" onclick="showTrolleyLayers()">
+          <input type="radio" name="options" id="trolleys" autocomplete="off">Trolleys
+        </label>
       </div>
       <div class="btn-group">
-        <button class="btn btn-default" onclick="showRailLayers()">Rail</button>
+        <label class="btn btn-default" onclick="showRailLayers()">
+          <input type="radio" name="options" id="rail" autocomplete="off">Rail
+        </label>
       </div>
       <div class="btn-group">
-        <button class="btn btn-default" onclick="showBusGPS()">GPS</button>
+        <label class="btn btn-default" onclick="showBusGPS()">
+          <input type="radio" name="options" id="gps" autocomplete="off">GPS
+        </label>
       </div>
       <div class="btn-group">
-        <button class="btn btn-default" onclick="toggleLayers()">All</button>
+        <label class="btn btn-default" onclick="toggleLayers()">
+          <input type="radio" name="options" id="all" autocomplete="off">All
+        </label>
       </div>
     </div>
   </footer>
