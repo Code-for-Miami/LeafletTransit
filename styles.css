@@ -5,10 +5,15 @@ body {
 .footer .btn-default {
   background-color: #f8f8f8;
   border-color: #e7e7e7;
+  border-radius: 0;
   color: #777;
   padding: 14px 12px;
 }
 
+.footer .btn-default:hover,
+.footer .btn-default:focus,
+.footer .btn-default.focus,
+.footer .btn-default:active,
 .footer .btn-default.active {
   background-color: #ddd;
   border-color: #ccc;
