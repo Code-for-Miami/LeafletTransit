@@ -1,5 +1,11 @@
 // Initialize map
-var map = L.map('map').setView([25.795865,-80.287046], 11);
+var map = L.map('map');
+
+map.on('locationfound', onLocationFound);
+map.on('locationerror', onLocationError);
+
+map.locate({setView: true, maxZoom: 16});
+
 var debug = false; // Enable console debug messages
 var enableRefresh = true;
 var showAllLayers = true;
@@ -210,6 +216,27 @@ var fakePositionOffset = 0.0;
 var apiURL = 'https://miami-transit-api.herokuapp.com/';
 
 init();
+
+/**
+ * Center Map view to and mark user's location
+ */
+function onLocationFound(e) {
+  var radius = e.accuracy / 2;
+
+  L.marker(e.latlng).addTo(map)
+  L.circle(e.latlng, radius).addTo(map);
+}
+
+/**
+ * Geolocation error handler - if blocked, view defaults to Miami Dade overview
+ */
+function onLocationError(e) {
+  if (e.message === 'Geolocation error: User denied Geolocation.') {
+    map.setView([25.795865,-80.287046], 11);
+  } else {
+    alert(e.message);
+  }
+}
 
 function init() {
   angular.module('transitApp', []).controller('transitController', ['$scope', function($scope) {
